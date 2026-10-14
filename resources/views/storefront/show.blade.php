@@ -51,18 +51,18 @@
                 </div>
 
                 <!-- Guarantee Badges -->
-                <div class="grid grid-cols-3 gap-3 pt-2 text-center">
-                    <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
-                        <span class="block text-base">🛡️</span>
-                        <span class="text-[11px] font-semibold text-slate-700">100% Original</span>
+                <div class="grid grid-cols-3 gap-1.5 sm:gap-3 pt-2 text-center">
+                    <div class="p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                        <span class="block text-sm sm:text-base">🛡️</span>
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-slate-700">100% Original</span>
                     </div>
                     <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
-                        <span class="block text-base">📦</span>
-                        <span class="text-[11px] font-semibold text-slate-700">Packing Rapi</span>
+                        <span class="block text-sm sm:text-base">📦</span>
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-slate-700">Packing Rapi</span>
                     </div>
                     <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
-                        <span class="block text-base">⚡</span>
-                        <span class="text-[11px] font-semibold text-slate-700">Kirim Hari Ini</span>
+                        <span class="block text-sm sm:text-base">⚡</span>
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-slate-700">Kirim Hari Ini</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="flex flex-col justify-between space-y-6">
                 <div>
                     <!-- Category & SKU -->
-                    <div class="flex items-center gap-3 mb-2">
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
                         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">
                             {{ $product->category->name }}
                         </span>
@@ -81,14 +81,14 @@
                     </div>
 
                     <!-- Title -->
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
                         {{ $product->name }}
                     </h1>
 
                     <!-- Price -->
-                    <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/70 mb-6 flex items-baseline gap-3">
+                    <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/70 mb-6 flex flex-wrap items-baseline gap-2 sm:gap-3">
                         <span class="text-xs text-amber-800 font-semibold uppercase">Harga Pas:</span>
-                        <span class="text-3xl font-black text-amber-800">
+                        <span class="text-2xl sm:text-3xl font-black text-amber-800">
                             {{ $product->formatted_price }}
                         </span>
                     </div>
@@ -101,7 +101,7 @@
                             </svg>
                             <span>Informasi Logistik & Pengiriman</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                             <div>
                                 <span class="text-slate-500 block">Berat Bersih / Ekspedisi:</span>
                                 <strong class="text-slate-900 text-sm font-bold">{{ $product->formatted_weight }}</strong>
@@ -119,17 +119,17 @@
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                            <div class="flex items-center gap-4">
+                            <div class="flex flex-wrap items-center gap-3 sm:gap-4">
                                 <label class="text-xs font-bold text-slate-700">Jumlah Pembelian:</label>
                                 <div class="inline-flex items-center border border-slate-300 rounded-xl bg-white shadow-xs">
                                     <button type="button" @click="if(qty > 1) qty--" 
-                                            class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-l-xl transition font-bold">
+                                            class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-l-xl transition font-bold min-h-[40px]">
                                         -
                                     </button>
                                     <input type="number" name="quantity" x-model.number="qty" min="1" :max="maxStock" 
                                            class="w-14 text-center text-sm font-bold border-none focus:outline-none focus:ring-0 p-0 text-slate-800">
                                     <button type="button" @click="if(qty < maxStock) qty++" 
-                                            class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-r-xl transition font-bold">
+                                            class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-r-xl transition font-bold min-h-[40px]">
                                         +
                                     </button>
                                 </div>
@@ -139,7 +139,7 @@
                             </div>
 
                             <button type="submit" 
-                                    class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-base shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition transform active:scale-[0.99]">
+                                    class="w-full min-h-[48px] py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition transform active:scale-[0.99]">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>

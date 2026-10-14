@@ -10,21 +10,21 @@
         <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
         <div class="absolute -left-10 -top-10 w-72 h-72 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
         
-        <div class="relative z-10 px-6 py-10 sm:px-12 sm:py-16 max-w-2xl">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md text-amber-100 mb-4 border border-white/20">
+        <div class="relative z-10 px-4 py-8 sm:px-10 sm:py-14 md:px-12 md:py-16 max-w-2xl">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/20 backdrop-blur-md text-amber-100 mb-3 sm:mb-4 border border-white/20">
                 ✨ Guest-First Shopping • Tanpa Akun & Password
             </span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white mb-4">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white mb-3 sm:mb-4">
                 Nutrisi & Perlengkapan Terbaik untuk Anabul
             </h1>
-            <p class="text-sm sm:text-base text-amber-100 mb-6 leading-relaxed">
+            <p class="text-xs sm:text-sm md:text-base text-amber-100 mb-5 sm:mb-6 leading-relaxed">
                 Pilih makanan sehat, pasir gumpal wangi, suplemen vitamin, dan aksesoris berkualitas. Langsung bayar dan lacak kurir tanpa hambatan login!
             </p>
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="#katalog" class="px-6 py-3 rounded-full bg-white text-amber-700 font-bold text-sm shadow-md hover:bg-amber-50 transition transform hover:-translate-y-0.5">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+                <a href="#katalog" class="px-6 py-3 rounded-full bg-white text-amber-700 font-bold text-xs sm:text-sm text-center shadow-md hover:bg-amber-50 transition transform active:scale-95 min-h-[44px] flex items-center justify-center">
                     Mulai Belanja Sekarang ↓
                 </a>
-                <a href="{{ route('orders.track-form') }}" class="px-5 py-3 rounded-full bg-amber-900/40 hover:bg-amber-900/60 border border-white/30 text-white font-semibold text-sm transition">
+                <a href="{{ route('orders.track-form') }}" class="px-5 py-3 rounded-full bg-amber-900/40 hover:bg-amber-900/60 border border-white/30 text-white font-semibold text-xs sm:text-sm text-center transition min-h-[44px] flex items-center justify-center">
                     🔍 Cek Resi / Lacak Pesanan
                 </a>
             </div>
@@ -33,16 +33,16 @@
 
     <!-- Category Filter Bar & Search -->
     <div id="katalog" class="space-y-4 pt-4">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b border-slate-200 pb-5">
             <div>
-                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Katalog Produk</h2>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Katalog Produk</h2>
                 <p class="text-xs sm:text-sm text-slate-500">
                     Menampilkan produk pilihan berkualitas dengan kalkulasi berat akurat untuk pengiriman.
                 </p>
             </div>
 
             <!-- Sorting Dropdown -->
-            <form action="{{ route('home') }}" method="GET" class="flex items-center gap-2">
+            <form action="{{ route('home') }}" method="GET" class="flex items-center gap-2 self-start md:self-auto">
                 @if(request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
@@ -51,7 +51,7 @@
                 @endif
                 <label for="sort" class="text-xs font-medium text-slate-500 whitespace-nowrap">Urutkan:</label>
                 <select id="sort" name="sort" onchange="this.form.submit()" 
-                        class="text-xs font-medium bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500/20">
+                        class="text-xs font-medium bg-white border border-slate-300 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500/20 min-h-[38px]">
                     <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
                     <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Harga Terendah</option>
                     <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Harga Tertinggi</option>
@@ -163,8 +163,8 @@
                         <!-- Price & Action -->
                         <div class="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                             <div>
-                                <span class="text-xs text-slate-400 block leading-none">Harga</span>
-                                <span class="text-base font-extrabold text-amber-700">
+                                <span class="text-[11px] text-slate-400 block leading-none">Harga</span>
+                                <span class="text-sm sm:text-base font-extrabold text-amber-700">
                                     {{ $product->formatted_price }}
                                 </span>
                             </div>
@@ -175,7 +175,7 @@
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="quantity" value="1">
                                     <button type="submit" 
-                                            class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white text-xs font-bold shadow-xs hover:shadow-md transition">
+                                            class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white text-xs font-bold shadow-xs hover:shadow-md transition min-h-[40px]">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                         </svg>
@@ -184,7 +184,7 @@
                                 </form>
                             @else
                                 <button type="button" disabled
-                                        class="px-3 py-2 rounded-xl bg-slate-200 text-slate-400 text-xs font-bold cursor-not-allowed">
+                                        class="px-3.5 py-2.5 rounded-xl bg-slate-200 text-slate-400 text-xs font-bold cursor-not-allowed min-h-[40px]">
                                     Habis
                                 </button>
                             @endif

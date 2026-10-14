@@ -7,21 +7,44 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="min-h-full flex text-slate-800 antialiased font-sans">
+<body class="min-h-full flex text-slate-800 antialiased font-sans" x-data="{ mobileSidebarOpen: false }">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 min-h-screen">
-        <!-- Logo Area -->
-        <div class="h-16 flex items-center px-6 bg-slate-950 border-b border-slate-800 gap-3">
-            <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-white text-base">🐾</div>
-            <div>
-                <span class="text-white font-bold text-base tracking-tight">PawPalace</span>
-                <span class="text-[10px] uppercase font-semibold text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded ml-1 border border-amber-800/40">Admin</span>
+    <!-- Mobile Sidebar Backdrop -->
+    <div x-show="mobileSidebarOpen" 
+         @click="mobileSidebarOpen = false" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-40 lg:hidden"
+         style="display: none;"></div>
+
+    <!-- Sidebar (Off-Canvas on Mobile/Tablet, Fixed on Desktop) -->
+    <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 min-h-screen transform transition-transform duration-300 ease-in-out lg:static lg:translate-x-0"
+           :class="mobileSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'">
+        
+        <!-- Logo Area & Mobile Close Button -->
+        <div class="h-16 flex items-center justify-between px-6 bg-slate-950 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-white text-base">🐾</div>
+                <div>
+                    <span class="text-white font-bold text-base tracking-tight">PawPalace</span>
+                    <span class="text-[10px] uppercase font-semibold text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded ml-1 border border-amber-800/40">Admin</span>
+                </div>
             </div>
+            
+            <!-- Mobile Close Button -->
+            <button type="button" @click="mobileSidebarOpen = false" class="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
 
         <!-- Navigation Menu -->
-        <nav class="flex-1 px-3 py-6 space-y-1">
+        <nav class="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
             <a href="{{ route('admin.dashboard') }}" 
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition {{ request()->routeIs('admin.dashboard') ? 'bg-amber-600 text-white' : 'hover:bg-slate-800 text-slate-300 hover:text-white' }}">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,9 +83,9 @@
         </nav>
 
         <!-- Admin Profile / Logout Footer -->
-        <div class="p-4 bg-slate-950 border-t border-slate-800">
+        <div class="p-4 bg-slate-950 border-t border-slate-800 mt-auto">
             <div class="flex items-center gap-3 mb-3">
-                <div class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center font-bold text-amber-400">
+                <div class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center font-bold text-amber-400 shrink-0">
                     {{ substr(auth()->user()->name ?? 'A', 0, 1) }}
                 </div>
                 <div class="flex-1 min-w-0">
@@ -72,7 +95,7 @@
             </div>
             <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="w-full text-center py-1.5 px-3 bg-slate-800 hover:bg-rose-900/40 text-slate-300 hover:text-rose-200 text-xs font-medium rounded transition">
+                <button type="submit" class="w-full text-center py-2 px-3 bg-slate-800 hover:bg-rose-900/40 text-slate-300 hover:text-rose-200 text-xs font-semibold rounded-lg transition min-h-[40px] flex items-center justify-center">
                     Keluar (Logout)
                 </button>
             </form>
@@ -80,25 +103,39 @@
     </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col min-w-0">
+    <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden">
         
         <!-- Top Header Bar -->
-        <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
-            <div class="font-bold text-slate-800 text-lg">
-                @yield('header_title', 'Admin Dashboard')
-            </div>
+        <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
             <div class="flex items-center gap-3">
-                <a href="{{ route('home') }}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition">
+                <!-- Hamburger Button (Mobile / Tablet) -->
+                <button type="button" @click="mobileSidebarOpen = true" 
+                        class="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition"
+                        title="Buka Navigasi">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div class="font-bold text-slate-800 text-base sm:text-lg truncate">
+                    @yield('header_title', 'Admin Dashboard')
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <a href="{{ route('home') }}" target="_blank" 
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition">
                     <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
-                    <span>Lihat Toko (Storefront)</span>
+                    <span class="hidden sm:inline">Lihat Toko (Storefront)</span>
+                    <span class="sm:hidden">Toko</span>
                 </a>
             </div>
         </header>
 
         <!-- Flash Messages -->
-        <div class="p-6 pb-0">
+        <div class="px-4 sm:px-6 pt-4 sm:pt-6 pb-0">
             @if(session('success'))
                 <div class="mb-4 flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm shadow-xs">
                     <svg class="w-5 h-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +165,7 @@
         </div>
 
         <!-- Page Content -->
-        <main class="flex-1 p-6">
+        <main class="flex-1 p-4 sm:p-6">
             @yield('content')
         </main>
     </div>

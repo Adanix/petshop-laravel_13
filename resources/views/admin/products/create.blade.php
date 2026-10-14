@@ -6,7 +6,7 @@
 @section('content')
 <div class="max-w-3xl mx-auto">
 
-    <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+    <div class="bg-white rounded-3xl border border-slate-200 p-4 sm:p-8 shadow-xs space-y-6">
         
         <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
             <div>

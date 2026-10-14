@@ -119,12 +119,12 @@
 
                 <!-- 3. Pilihan Kurir Logistik -->
                 <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
                         <div class="flex items-center gap-2.5">
-                            <div class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">3</div>
+                            <div class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold shrink-0">3</div>
                             <h2 class="text-base font-bold text-slate-900">Pilihan Kurir & Tarif Pengiriman</h2>
                         </div>
-                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700">
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700 self-start sm:self-auto">
                             Total Berat: {{ number_format($cartData['total_weight_grams'], 0, ',', '.') }} gr ({{ ceil($cartData['total_weight_grams']/1000) }} Kg dihitung)
                         </span>
                     </div>
@@ -133,7 +133,7 @@
                         Tarif dihitung otomatis berdasarkan berat riil produk menggunakan simulasi logistik cerdas.
                     </p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         <template x-for="rate in rates" :key="rate.courier_code + '|' + rate.service">
                             <label class="relative flex flex-col p-4 rounded-2xl border-2 cursor-pointer transition"
                                    :class="selectedCourier === (rate.courier_code + '|' + rate.service) ? 'border-amber-500 bg-amber-50/40 shadow-xs' : 'border-slate-200 hover:border-slate-300 bg-white'">

@@ -30,8 +30,8 @@
         <div class="lg:col-span-2 space-y-6">
 
             <!-- Customer & Delivery Address Card -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4">
-                <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-xs space-y-4">
+                <div class="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
                     <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Data Pembeli & Alamat Pengiriman</h3>
                     <span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
                         Guest Checkout (No-Login)
@@ -66,7 +66,7 @@
 
             <!-- Ordered Items Table (Snapshot) -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-                <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+                <div class="p-4 sm:p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                         <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Item Pesanan (Snapshot Data)</h3>
                         <p class="text-xs text-slate-400">Harga dan bobot terkunci permanen saat pesanan dibuat</p>
@@ -76,46 +76,48 @@
                     </span>
                 </div>
 
-                <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider">
-                        <tr>
-                            <th class="px-5 py-3">Produk Snapshot</th>
-                            <th class="px-5 py-3">Berat Satuan</th>
-                            <th class="px-5 py-3">Harga Satuan</th>
-                            <th class="px-5 py-3 text-center">Qty</th>
-                            <th class="px-5 py-3 text-right">Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 text-slate-700">
-                        @foreach($order->items as $item)
+                <div class="overflow-x-auto w-full">
+                    <table class="min-w-[550px] w-full text-left text-xs">
+                        <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider">
                             <tr>
-                                <td class="px-5 py-3">
-                                    <span class="font-bold text-slate-900 block">{{ $item->product_name_snapshot }}</span>
-                                    @if($item->product)
-                                        <span class="text-[11px] text-emerald-600 font-mono">Sisa stok inventaris saat ini: {{ $item->product->stock }} unit</span>
-                                    @else
-                                        <span class="text-[11px] text-slate-400 italic">Produk asli telah dihapus dari katalog</span>
-                                    @endif
-                                </td>
-                                <td class="px-5 py-3 text-slate-600">
-                                    {{ $item->formatted_weight_snapshot }}
-                                </td>
-                                <td class="px-5 py-3 font-semibold text-slate-800">
-                                    {{ $item->formatted_price_snapshot }}
-                                </td>
-                                <td class="px-5 py-3 text-center font-bold text-slate-900">
-                                    {{ $item->quantity }}
-                                </td>
-                                <td class="px-5 py-3 text-right font-extrabold text-slate-900">
-                                    {{ $item->formatted_subtotal }}
-                                </td>
+                                <th class="px-5 py-3">Produk Snapshot</th>
+                                <th class="px-5 py-3">Berat Satuan</th>
+                                <th class="px-5 py-3">Harga Satuan</th>
+                                <th class="px-5 py-3 text-center">Qty</th>
+                                <th class="px-5 py-3 text-right">Subtotal</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-700">
+                            @foreach($order->items as $item)
+                                <tr>
+                                    <td class="px-5 py-3">
+                                        <span class="font-bold text-slate-900 block">{{ $item->product_name_snapshot }}</span>
+                                        @if($item->product)
+                                            <span class="text-[11px] text-emerald-600 font-mono">Sisa stok inventaris saat ini: {{ $item->product->stock }} unit</span>
+                                        @else
+                                            <span class="text-[11px] text-slate-400 italic">Produk asli telah dihapus dari katalog</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-5 py-3 text-slate-600">
+                                        {{ $item->formatted_weight_snapshot }}
+                                    </td>
+                                    <td class="px-5 py-3 font-semibold text-slate-800">
+                                        {{ $item->formatted_price_snapshot }}
+                                    </td>
+                                    <td class="px-5 py-3 text-center font-bold text-slate-900">
+                                        {{ $item->quantity }}
+                                    </td>
+                                    <td class="px-5 py-3 text-right font-extrabold text-slate-900">
+                                        {{ $item->formatted_subtotal }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 <!-- Financial Calculation -->
-                <div class="p-5 bg-slate-50 border-t border-slate-100 space-y-2 text-xs max-w-xs ml-auto">
+                <div class="p-4 sm:p-5 bg-slate-50 border-t border-slate-100 space-y-2 text-xs w-full sm:max-w-xs sm:ml-auto">
                     <div class="flex justify-between text-slate-600">
                         <span>Subtotal Produk</span>
                         <span class="font-bold text-slate-900">{{ $order->formatted_subtotal }}</span>

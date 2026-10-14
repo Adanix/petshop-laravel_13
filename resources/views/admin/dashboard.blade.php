@@ -7,10 +7,10 @@
 <div class="space-y-6">
 
     <!-- 4 Main Metric Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
         
         <!-- Metric 1: Total Pendapatan -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex items-center gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -18,14 +18,14 @@
             </div>
             <div>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pendapatan (Paid)</p>
-                <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">
+                <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">
                     Rp {{ number_format($totalRevenue, 0, ',', '.') }}
                 </h3>
             </div>
         </div>
 
         <!-- Metric 2: Pesanan Baru Perlu Diproses -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex items-center gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -33,14 +33,14 @@
             </div>
             <div>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Perlu Diproses</p>
-                <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">
+                <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">
                     {{ $ordersProcessingCount }} Pesanan
                 </h3>
             </div>
         </div>
 
         <!-- Metric 3: Pesanan Dikirim -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex items-center gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -49,14 +49,14 @@
             </div>
             <div>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sedang Dikirim</p>
-                <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">
+                <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">
                     {{ $ordersShippedCount }} Paket
                 </h3>
             </div>
         </div>
 
         <!-- Metric 4: Peringatan Stok Menipis (Stok <= 5) -->
-        <div class="bg-white rounded-2xl border {{ $lowStockProductsCount > 0 ? 'border-rose-300 bg-rose-50/20' : 'border-slate-200' }} p-5 shadow-xs flex items-center gap-4">
+        <div class="bg-white rounded-2xl border {{ $lowStockProductsCount > 0 ? 'border-rose-300 bg-rose-50/20' : 'border-slate-200' }} p-4 sm:p-5 shadow-xs flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl {{ $lowStockProductsCount > 0 ? 'bg-rose-100 text-rose-600 animate-pulse' : 'bg-slate-100 text-slate-500' }} flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -64,7 +64,7 @@
             </div>
             <div>
                 <p class="text-xs font-semibold {{ $lowStockProductsCount > 0 ? 'text-rose-600' : 'text-slate-400' }} uppercase tracking-wider">Stok Menipis (≤ 5)</p>
-                <h3 class="text-xl font-extrabold {{ $lowStockProductsCount > 0 ? 'text-rose-700' : 'text-slate-900' }} mt-0.5">
+                <h3 class="text-lg sm:text-xl font-extrabold {{ $lowStockProductsCount > 0 ? 'text-rose-700' : 'text-slate-900' }} mt-0.5">
                     {{ $lowStockProductsCount }} Produk
                 </h3>
             </div>
@@ -74,9 +74,9 @@
 
     <!-- Alert Banner If Low Stock Exists -->
     @if($lowStockProductsCount > 0)
-        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 flex items-center justify-between gap-4">
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div class="flex items-center gap-3">
-                <span class="text-2xl">⚠️</span>
+                <span class="text-2xl shrink-0">⚠️</span>
                 <div>
                     <h4 class="text-xs font-bold text-amber-900 uppercase tracking-wider">Perhatian Inventaris</h4>
                     <p class="text-xs text-amber-800">
@@ -84,7 +84,7 @@
                     </p>
                 </div>
             </div>
-            <a href="{{ route('admin.products.index', ['filter' => 'low_stock']) }}" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shrink-0 transition">
+            <a href="{{ route('admin.products.index', ['filter' => 'low_stock']) }}" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shrink-0 transition self-end sm:self-auto min-h-[36px] flex items-center">
                 Lihat Produk &rarr;
             </a>
         </div>
@@ -104,8 +104,8 @@
                 </a>
             </div>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
+            <div class="overflow-x-auto w-full">
+                <table class="min-w-[640px] w-full text-left text-xs">
                     <thead class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
                         <tr>
                             <th class="px-5 py-3">No. Pesanan</th>

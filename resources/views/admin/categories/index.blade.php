@@ -7,7 +7,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     <!-- Add Category Form (1 Col) -->
-    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs space-y-4">
         <div class="border-b border-slate-100 pb-3">
             <h3 class="font-bold text-slate-900 text-sm">Tambah Kategori Baru</h3>
             <p class="text-xs text-slate-400">Buat klasifikasi produk kebutuhan anabul.</p>
@@ -46,15 +46,15 @@
 
     <!-- Categories List Table (2 Cols) -->
     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
             <div>
                 <h3 class="font-bold text-slate-900 text-sm">Daftar Kategori Produk</h3>
                 <p class="text-xs text-slate-400">Total {{ $categories->count() }} kategori terdaftar</p>
             </div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+        <div class="overflow-x-auto w-full">
+            <table class="min-w-[520px] w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider">
                     <tr>
                         <th class="px-5 py-3">Nama Kategori</th>
@@ -95,7 +95,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
-                                                class="px-2.5 py-1 bg-slate-100 hover:bg-rose-100 text-slate-500 hover:text-rose-700 rounded font-semibold text-[11px] transition"
+                                                class="inline-flex items-center px-3 py-1.5 min-h-[36px] bg-slate-100 hover:bg-rose-100 text-slate-500 hover:text-rose-700 rounded-lg font-semibold text-xs transition"
                                                 {{ $cat->products_count > 0 ? 'disabled title="Tidak bisa dihapus karena masih ada produk"' : '' }}>
                                             Hapus
                                         </button>

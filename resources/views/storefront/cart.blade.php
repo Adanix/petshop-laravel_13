@@ -75,14 +75,14 @@
                                 </div>
                             </div>
 
-                            <!-- Quantity Form -->
-                            <div class="flex items-center gap-4 self-end sm:self-center">
+                            <!-- Quantity Form & Controls -->
+                            <div class="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-3 sm:gap-4 pt-3 sm:pt-0 border-t border-slate-100 sm:border-0">
                                 <form action="{{ route('cart.update') }}" method="POST" class="flex items-center">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $prod->id }}">
                                     <div class="inline-flex items-center border border-slate-300 rounded-lg bg-slate-50 text-xs">
                                         <button type="submit" name="quantity" value="{{ $item['quantity'] - 1 }}" 
-                                                class="w-7 h-7 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-200 rounded-l-lg transition">
+                                                class="w-8 h-8 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-200 rounded-l-lg transition">
                                             -
                                         </button>
                                         <span class="w-9 text-center font-bold text-slate-900">
@@ -90,16 +90,16 @@
                                         </span>
                                         <button type="submit" name="quantity" value="{{ $item['quantity'] + 1 }}" 
                                                 {{ $item['quantity'] >= $prod->stock ? 'disabled' : '' }}
-                                                class="w-7 h-7 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-200 rounded-r-lg transition {{ $item['quantity'] >= $prod->stock ? 'opacity-40 cursor-not-allowed' : '' }}">
+                                                class="w-8 h-8 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-200 rounded-r-lg transition {{ $item['quantity'] >= $prod->stock ? 'opacity-40 cursor-not-allowed' : '' }}">
                                             +
                                         </button>
                                     </div>
                                 </form>
 
                                 <!-- Subtotal per Item -->
-                                <div class="text-right min-w-[90px]">
-                                    <div class="text-xs text-slate-400">Total</div>
-                                    <div class="text-sm font-extrabold text-amber-700">
+                                <div class="text-right min-w-[80px] sm:min-w-[90px]">
+                                    <div class="text-[11px] text-slate-400">Total</div>
+                                    <div class="text-xs sm:text-sm font-extrabold text-amber-700">
                                         Rp {{ number_format($item['subtotal'], 0, ',', '.') }}
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                 <!-- Remove Item -->
                                 <form action="{{ route('cart.remove', $prod->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition" title="Hapus Item">
+                                    <button type="submit" class="p-2 text-slate-400 hover:text-rose-600 rounded-lg transition min-h-[36px]" title="Hapus Item">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>

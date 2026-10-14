@@ -7,15 +7,15 @@
 <div class="space-y-6">
 
     <!-- Top Action & Search Bar -->
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
         
-        <form action="{{ route('admin.products.index') }}" method="GET" class="flex flex-wrap items-center gap-2 w-full sm:w-auto flex-1">
+        <form action="{{ route('admin.products.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 w-full sm:w-auto flex-1">
             <input type="text" name="search" value="{{ request('search') }}"
                    placeholder="Cari nama produk atau SKU..."
-                   class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 w-full sm:w-64">
+                   class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 w-full sm:w-64 min-h-[38px]">
             
             <select name="category_id" onchange="this.form.submit()"
-                    class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700">
+                    class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700 min-h-[38px]">
                 <option value="">Semua Kategori</option>
                 @foreach($categories as $cat)
                     <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>
@@ -24,19 +24,19 @@
                 @endforeach
             </select>
 
-            <button type="submit" class="px-3 py-2 bg-slate-800 text-white rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+            <button type="submit" class="px-3 py-2 bg-slate-800 text-white rounded-lg text-xs font-semibold hover:bg-slate-700 transition min-h-[38px] flex items-center justify-center">
                 Cari
             </button>
 
             @if(request('search') || request('category_id') || request('filter'))
-                <a href="{{ route('admin.products.index') }}" class="text-xs text-rose-600 hover:underline ml-1">
+                <a href="{{ route('admin.products.index') }}" class="text-xs text-rose-600 hover:underline ml-1 text-center py-1">
                     Reset
                 </a>
             @endif
         </form>
 
         <a href="{{ route('admin.products.create') }}" 
-           class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl shadow-xs transition shrink-0 flex items-center gap-1.5">
+           class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl shadow-xs transition shrink-0 flex items-center justify-center gap-1.5 min-h-[40px]">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -47,8 +47,8 @@
 
     <!-- Products Table -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+        <div class="overflow-x-auto w-full">
+            <table class="min-w-[720px] w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase tracking-wider">
                     <tr>
                         <th class="px-5 py-3.5">Produk</th>

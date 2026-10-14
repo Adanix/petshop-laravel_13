@@ -6,16 +6,16 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
 
     <!-- Top Alert with Shareable Link -->
-    <div class="bg-amber-500/10 border border-amber-300 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div class="bg-amber-500/10 border border-amber-300 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
             <span class="text-xs font-bold text-amber-900 uppercase tracking-wider block">Tautan Invoice Publik (Tanpa Login)</span>
             <p class="text-xs text-amber-800 mt-0.5">Simpan atau bookmark URL ini untuk memeriksa kembali status pesanan Anda sewaktu-waktu.</p>
         </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto" x-data="{ copied: false }">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto" x-data="{ copied: false }">
             <input type="text" readonly value="{{ url()->current() . '?token=' . $order->tracking_token }}" 
-                   class="text-xs bg-white border border-amber-200 rounded-lg px-3 py-1.5 w-full sm:w-64 font-mono text-slate-600 truncate">
+                   class="text-xs bg-white border border-amber-200 rounded-lg px-3 py-2 w-full sm:w-64 font-mono text-slate-600 truncate min-h-[38px]">
             <button type="button" @click="navigator.clipboard.writeText('{{ url()->current() . '?token=' . $order->tracking_token }}'); copied = true; setTimeout(() => copied = false, 2500)"
-                    class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shrink-0 transition">
+                    class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shrink-0 transition min-h-[38px] flex items-center justify-center">
                 <span x-show="!copied">Salin URL</span>
                 <span x-show="copied" class="text-amber-100">Tersalin! ✓</span>
             </button>
@@ -26,7 +26,7 @@
     <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         
         <!-- Header -->
-        <div class="p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-slate-800 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="p-5 sm:p-8 bg-gradient-to-r from-slate-900 to-slate-800 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
                 <span class="text-xs font-mono text-amber-400 font-semibold tracking-wide uppercase">INVOICE RESMI PESANAN</span>
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">{{ $order->order_number }}</h1>
@@ -207,11 +207,11 @@
                         </p>
                     </div>
 
-                    <form action="{{ route('orders.mock-payment', $order->order_number) }}" method="POST">
+                    <form action="{{ route('orders.mock-payment', $order->order_number) }}" method="POST" class="w-full sm:w-auto">
                         @csrf
                         <input type="hidden" name="token" value="{{ $order->tracking_token }}">
                         <button type="submit" 
-                                class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/25 flex items-center gap-2 whitespace-nowrap transition transform active:scale-95">
+                                class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 whitespace-nowrap transition transform active:scale-95 min-h-[48px]">
                             <span>💳 Simulasi Bayar Sekarang (Mock Payment)</span>
                         </button>
                     </form>

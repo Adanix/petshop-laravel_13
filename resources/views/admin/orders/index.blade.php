@@ -8,17 +8,17 @@
 
     <!-- Filters Bar -->
     <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
-        <form action="{{ route('admin.orders.index') }}" method="GET" class="flex flex-wrap items-center gap-3">
+        <form action="{{ route('admin.orders.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
             
-            <div class="flex-1 min-w-[200px]">
+            <div class="flex-1 min-w-0 sm:min-w-[200px]">
                 <input type="text" name="search" value="{{ request('search') }}"
                        placeholder="Cari no. pesanan, nama, nomor telepon, resi..."
                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20">
             </div>
 
-            <div>
+            <div class="w-full sm:w-auto">
                 <select name="order_status" onchange="this.form.submit()"
-                        class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700">
+                        class="w-full sm:w-auto px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700">
                     <option value="">Semua Status Pesanan</option>
                     <option value="pending" {{ request('order_status') === 'pending' ? 'selected' : '' }}>Pending (Menunggu Bayar)</option>
                     <option value="processing" {{ request('order_status') === 'processing' ? 'selected' : '' }}>Processing (Perlu Dikirim)</option>
@@ -28,31 +28,33 @@
                 </select>
             </div>
 
-            <div>
+            <div class="w-full sm:w-auto">
                 <select name="payment_status" onchange="this.form.submit()"
-                        class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700">
+                        class="w-full sm:w-auto px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white text-slate-700">
                     <option value="">Semua Status Bayar</option>
                     <option value="unpaid" {{ request('payment_status') === 'unpaid' ? 'selected' : '' }}>Unpaid (Belum Lunas)</option>
                     <option value="paid" {{ request('payment_status') === 'paid' ? 'selected' : '' }}>Paid (Lunas)</option>
                 </select>
             </div>
 
-            <button type="submit" class="px-3.5 py-2 bg-slate-800 text-white rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
-                Terapkan
-            </button>
+            <div class="flex items-center gap-2">
+                <button type="submit" class="flex-1 sm:flex-initial px-3.5 py-2 min-h-[38px] bg-slate-800 text-white rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+                    Terapkan
+                </button>
 
-            @if(request('search') || request('order_status') || request('payment_status'))
-                <a href="{{ route('admin.orders.index') }}" class="text-xs text-rose-600 hover:underline">
-                    Reset Filter
-                </a>
-            @endif
+                @if(request('search') || request('order_status') || request('payment_status'))
+                    <a href="{{ route('admin.orders.index') }}" class="text-xs text-rose-600 hover:underline px-2 py-1">
+                        Reset Filter
+                    </a>
+                @endif
+            </div>
         </form>
     </div>
 
     <!-- Orders Table -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+        <div class="overflow-x-auto w-full">
+            <table class="min-w-[880px] w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase tracking-wider">
                     <tr>
                         <th class="px-5 py-3.5">No. Pesanan</th>
@@ -140,7 +142,7 @@
                             <!-- Action -->
                             <td class="px-5 py-3 text-right whitespace-nowrap">
                                 <a href="{{ route('admin.orders.show', $ord->id) }}" 
-                                   class="px-3 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 rounded font-bold text-[11px] transition">
+                                   class="inline-flex items-center px-3 py-1.5 min-h-[36px] bg-amber-50 hover:bg-amber-100 text-amber-900 rounded-lg font-bold text-xs transition">
                                     Kelola &rarr;
                                 </a>
                             </td>

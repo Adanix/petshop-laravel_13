@@ -11,24 +11,24 @@
 <body class="min-h-full flex flex-col text-slate-800 antialiased font-sans">
 
     <!-- Top Notification Bar -->
-    <div class="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 text-white text-xs font-medium py-1.5 px-4 text-center tracking-wide">
+    <div class="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 text-white text-[11px] sm:text-xs font-medium py-1.5 px-3 sm:px-4 text-center tracking-wide leading-snug">
         <span>🐾 <strong>Belanja Tanpa Ribet:</strong> Zero-Login Checkout! Pilih barang, isi alamat, kurir langsung kirim ke rumah Anda.</span>
     </div>
 
     <!-- Main Navigation Header -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
                 
                 <!-- Logo -->
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-400 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition duration-200">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ route('home') }}" class="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-400 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition duration-200">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18zM8.25 9.75h.008v.008H8.25V9.75zm7.5 0h.008v.008h-.008V9.75zm-6 4.5a3.75 3.75 0 005.25 0" />
                         </svg>
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">PawPalace</span>
+                        <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">PawPalace</span>
                         <span class="hidden sm:inline-block text-xs font-semibold uppercase tracking-wider text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded ml-1">Petshop</span>
                     </div>
                 </a>
@@ -51,19 +51,20 @@
                 </div>
 
                 <!-- Navigation Actions -->
-                <div class="flex items-center gap-2 sm:gap-4">
+                <div class="flex items-center gap-1.5 sm:gap-4">
                     
                     <!-- Lacak Pesanan Link -->
-                    <a href="{{ route('orders.track-form') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition">
-                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="{{ route('orders.track-form') }}" class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition min-h-[40px]">
+                        <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        <span>Lacak Pesanan</span>
+                        <span class="hidden sm:inline">Lacak Pesanan</span>
+                        <span class="sm:hidden">Lacak</span>
                     </a>
 
                     <!-- Cart Button with Live Counter Badge -->
-                    <a href="{{ route('cart.index') }}" class="relative inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-sm font-semibold text-slate-800 bg-amber-50 hover:bg-amber-100 text-amber-900 rounded-full border border-amber-200 transition">
-                        <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="{{ route('cart.index') }}" class="relative inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-800 bg-amber-50 hover:bg-amber-100 text-amber-900 rounded-full border border-amber-200 transition min-h-[40px]">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <span class="hidden sm:inline">Keranjang</span>
@@ -75,8 +76,8 @@
                     <div class="h-6 w-px bg-slate-200"></div>
 
                     <!-- Admin Portal Link -->
-                    <a href="{{ route('admin.login') }}" class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-800 transition" title="Portal Pengelola">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="{{ route('admin.login') }}" class="inline-flex items-center gap-1 p-2 text-xs font-medium text-slate-500 hover:text-slate-800 transition min-h-[40px]" title="Portal Pengelola">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         <span class="hidden md:inline">Admin</span>
